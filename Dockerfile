@@ -1,11 +1,12 @@
 FROM ubuntu:jammy
 MAINTAINER suhart.hs@gmail.com
 
-RUN apt-get update
-RUN apt-get -y upgrade
-
+RUN apt update
+RUN apt -y upgrade
+RUN apt -y install apt-utils
+RUN DEBIAN_FRONTEND=noninteractive TZ=Asia/Jakarta apt-get -y install tzdata
 # Install Apache2 / PHP 7.
-RUN apt-get -y install php7.0 libapache2-mod-php7.0 php7.0-cli php7.0-common php7.0-mbstring php7.0-gd php7.0-intl php7.0-xml  php7.0-mcrypt php7.0-zip php-pear php7-curl curl alien libaio1
+RUN apt install -y apache2 php  libapache2-mod-php php-cli php-common php-mbstring php-gd php-intl php-xml  php-zip php-pear php-curl curl alien libaio1
 # Copy semua Install the Oracle Instant Client
 ADD oracle/oracle-instantclient-basic-21.6.0.0.0-1.el8.x86_64.rpm /tmp
 ADD oracle/oracle-instantclient-devel-21.6.0.0.0-1.el8.x86_64.rpm /tmp
